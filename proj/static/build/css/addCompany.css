@@ -1,0 +1,25 @@
+
+
+body{
+	background-color:#e6f3e3;
+	padding-top:20px;
+
+	
+
+}
+.form-group{
+	padding:5px;
+}
+
+.btn btn-success{
+     border-color: blue;
+
+}
+
+#branches{
+	color:green;
+}
+
+.form-group{
+	color:blue;
+}

@@ -1,0 +1,10 @@
+<html>
+<h1>e-book market</h1>
+{% for post in posts %}
+<div>
+	<p>{{ post.title }} </p>
+	<p>{{ post.desc }} </p>
+	<p>{{ post.pub_date }}</p>
+</div>
+{% endfor %}
+</html>
