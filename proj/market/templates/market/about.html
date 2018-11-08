@@ -77,17 +77,12 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="index.html">Home</a>
-								<ul class="sub_menu">
-									<li><a href="index.html">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
-								</ul>
+								<a href="/market/index">Home</a>
 							</li>
-
 							<li>
 								<a href="product.html">Shop</a>
 							</li>
+
 
 							<li>
 								<a href="/market/about/">About</a>
@@ -95,6 +90,12 @@
 
 							<li>
 								<a href="contact.html">Contact</a>
+							</li>
+							<li>
+								<a href="/market/news/">Download news</a>
+							</li>
+							<li>
+								<a href="/market/signup/">Sign in</a>
 							</li>
 						</ul>
 					</nav>
@@ -110,48 +111,33 @@
 
 					<div class="header-wrapicon2">
 						<img src="{% static 'fashe-colorlib/images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">2</span>
+						<span class="header-icons-noti">{{count}}</span>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
+								{% for e in ebook %}
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-										<img src="{% static 'fashe-colorlib/images/item-cart-01.jpg' %}" alt="IMG">
+										<img src={{e.image.url}} alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
 										<a href="#" class="header-cart-item-name">
-											Book1
+											{{e.title}}
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $36.00
+											1 x ${{e.cost}}
 										</span>
 									</div>
 								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="{% static 'fashe-colorlib/images/item-cart-02.jpg' %}" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Book2
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $16.00
-										</span>
-									</div>
-								</li>
-
+								{% endfor %}
 								
 							</ul>
 
 							<div class="header-cart-total">
-								Total: $52.00
+								Total: ${{c}}
 							</div>
 
 							<div class="header-cart-buttons">
@@ -164,7 +150,7 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="/market/checkout/" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										Check Out
 									</a>
 								</div>
@@ -221,14 +207,14 @@ its title/author, instead of manually entering the metadata. It also supports a 
 	<!-- Footer -->
 	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
 		<div class="flex-w p-b-90">
-			<div class="w-size5 p-t-30 p-l-15 respon3" style="margin-right: 400px">
+			<div class="w-size5 p-t-30 p-l-15 respon3" style="display: inline-block; text-align: left;width: 75%">
 				<h4 class="s-text12 p-b-30">
 					GET IN TOUCH
 				</h4>
 
 				<div>
 					<p class="s-text7 w-size27">
-						Any questions? Contact us 
+						NITW Warangal
 					</p>
 
 					<div class="flex-m p-t-30">
@@ -240,8 +226,9 @@ its title/author, instead of manually entering the metadata. It also supports a 
 					</div>
 				</div>
 			</div>
+
 			
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
+			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3" style="display: inline-block; text-align: left;width: 25%">
 				<h4 class="s-text12 p-b-30">
 					Newsletter
 				</h4>
@@ -284,6 +271,9 @@ its title/author, instead of manually entering the metadata. It also supports a 
 				<img class="h-size2" src="{% static 'fashe-colorlib/images/icons/discover.png' %}" alt="IMG-DISCOVER">
 			</a>
 
+			<div class="t-center s-text8 p-t-20">
+				Copyright © 2018 All rights reserved.
+			</div>
 		</div>
 	</footer>
 

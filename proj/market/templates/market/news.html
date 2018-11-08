@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Cart</title>
+	<title>News</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1' %}">
 <!--===============================================================================================-->
@@ -67,7 +67,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="/market/index/" class="logo">
+				<a href="index.html" class="logo">
 					<img src="{% static 'fashe-colorlib/images/icons/ebms.jpeg' %}" alt="IMG-LOGO"
 					width="150" style="max-height: 50px">
 				</a>
@@ -77,12 +77,12 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="/market/index/">Home</a>
+								<a href="/market/index">Home</a>
 							</li>
-
 							<li>
 								<a href="product.html">Shop</a>
 							</li>
+
 
 							<li>
 								<a href="/market/about/">About</a>
@@ -95,7 +95,7 @@
 								<a href="/market/news/">Download news</a>
 							</li>
 							<li>
-								<a href="/market/signin/">Sign in</a>
+								<a href="/market/signup/">Sign in</a>
 							</li>
 						</ul>
 					</nav>
@@ -128,7 +128,7 @@
 										</a>
 
 										<span class="header-cart-item-info">
-											${{e.cost}}
+											1 x ${{e.cost}}
 										</span>
 									</div>
 								</li>
@@ -150,7 +150,7 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="/market/checkout/" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										Check Out
 									</a>
 								</div>
@@ -167,58 +167,14 @@
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/static/fashe-colorlib/images/master-slide-03.jpg);">
 	</section>
 
-	<!-- Cart -->
-	<section class="cart bgwhite p-t-70 p-b-100">
-		<div class="container">
-			<!-- Cart item -->
-			<div class="container-table-cart pos-relative">
-				<div class="wrap-table-shopping-cart bgwhite">
-					<table class="table-shopping-cart">
-						<tr class="table-head">
-							<th class="column-1"></th>
-							<th class="column-2">Product</th>
-							<th class="column-3">Price</th>
-						</tr>
-						{% for e in ebook %}
-						<tr class="table-row">
-							<td class="column-1">
-								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src={{e.image.url}} alt="IMG-PRODUCT">
-								</div>
-							</td>
-							<td class="column-2">{{e.title}}</td>
-							<td class="column-3" id="fname2">${{e.cost}}</td>
-						</tr>
-						{% endfor %}
-						
-					</table>
-				</div>
-			</div>
-			<!-- Total -->
-			<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-				<h5 class="m-text20 p-b-24">
-					Cart Totals
-				</h5>
-				<!--  -->
-				<div class="flex-w flex-sb-m p-t-26 p-b-30">
-					<span class="m-text22 w-size19 w-full-sm">
-						Total:
-					</span>
-
-					<span class="m-text21 w-size20 w-full-sm">
-						${{c}}
-					</span>
-				</div>
-
-				<div class="size15 trans-0-4">
-					<!-- Button -->
-					<a href="/market/checkout/"><button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-						Proceed to Checkout
-					</button>
-				</div>
-			</div>
-		</div>
-	</section>
+	<!-- content page -->
+			<iframe id="inlineFrameExample"
+					title="Times Of INDIA"
+					src="https://www.dailynewspapers.in/"
+					height="1000%" width="100%" 
+					style="clip-path: inset(150px 0px 80px 70px);">
+			</iframe>
+	
 
 
 

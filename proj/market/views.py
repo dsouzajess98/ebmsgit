@@ -27,7 +27,6 @@ def cart(request):
 	response['c']=c
 	return render(request, 'market/cart.html', response)
 
-@login_required(login_url='/market/signup')	
 def about(request):
     return render(request, 'market/about.html', {})
 
@@ -62,12 +61,13 @@ def signin(request):
 			return redirect('/market/index/')
 	return render(request,'market/login.html',response)
 
-@login_required(login_url='/market/signup')
 def index(request):
 
     posts = Post.objects.all()
     response={}
     response['posts']=posts
+    if not request.user.is_authenticated():
+		return render(request,'market/index.html',response)
     cust=Customer.objects.get(user=request.user)
     response['user']=request.user
     p=cust.book.all()
@@ -133,3 +133,37 @@ def booklist(request):
 	response['c']=c
 	response['ebook']=p
 	return render(request, 'market/ebook.html', response)
+	
+	
+def news(request):
+	if not request.user.is_authenticated():
+		return render(request,'market/news.html',{})
+	cust=Customer.objects.get(user=request.user)
+	p=cust.book.all()
+	response={}
+	response['ebook']=p
+	count=0
+	c=0
+	for k in p:
+		count=count+1
+		c=c+k.cost
+	response['count']=count
+	response['c']=c
+	return render(request, 'market/news.html', response)
+	
+
+def checkout(request):
+	if not request.user.is_authenticated():
+		return render(request,'market/news.html',{})
+	cust=Customer.objects.get(user=request.user)
+	p=cust.book.all()
+	response={}
+	response['ebook']=p
+	count=0
+	c=0
+	for k in p:
+		count=count+1
+		c=c+k.cost
+	response['count']=count
+	response['c']=c
+	return render(request, 'market/checkout.html', response)

@@ -13,6 +13,9 @@ urlpatterns = [
         url(r'^booklist/$', views.booklist, name='index'),
         url(r'^addtocart/(?P<post>[A-Za-z0-9., ]+)/$', views.addtocart, name='addtocart'),
         url(r'^logout/$',views.logout_view,name="logout"),
+		url(r'^news/$', views.news, name='news'),
+		url(r'^checkout/$', views.checkout, name='checkout'),
+        
         #url(),  
         
         
