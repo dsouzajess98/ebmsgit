@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'reglog',
+    'payment',
     'market',
     'django.contrib.admin',
     'django.contrib.auth',

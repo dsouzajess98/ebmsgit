@@ -89,6 +89,14 @@ def addtocart(request,post):
 	cust.save()
 	return redirect('/market/index')
 
+@login_required(login_url='/market/signup')
+def delfromcart(request,post):
+    p=Post.objects.get(title=post)
+    cust=Customer.objects.get(user=request.user)
+    cust.book.delete(p);
+    cust.save()
+    return redirect('/market/index')
+
 
 @login_required(login_url='/market/signup')
 def logout_view(request):
