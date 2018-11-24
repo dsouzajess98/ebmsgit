@@ -42,6 +42,8 @@ class Post(models.Model):
     tags=models.ManyToManyField(Tag,blank=True)
     rating=models.IntegerField(default=0)
     count=models.IntegerField(default=0)
+    edition=models.CharField(max_length=200,null=True)
+    series=models.CharField(max_length=200,null=True)
 
 
     def publish(self):

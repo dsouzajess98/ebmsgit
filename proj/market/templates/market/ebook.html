@@ -85,7 +85,9 @@
 								<a href="/market/booklist/">Shop</a>
 							</li>
 
-							
+							<li>
+								<a href="/market/about/">About</a>
+							</li>
 							<li>
 								<a href="contact.html">Contact</a>
 							</li>
@@ -93,9 +95,7 @@
 							<li>
 								<a href="/market/news/">Download news</a>
 							</li>
-							<li>
-								<a href="/market/signup/">Sign in</a>
-							</li>
+							
 						</ul>
 					</nav>
 				</div>
@@ -421,6 +421,9 @@
 						<input type="radio" name="type" value="author">Author<br>
 						<input type="radio" name="type" value="isbn">ISBN<br>
 						<input type="radio" name="type" value="dop">Date of publishing(DD/MM/YYYY)<br>
+						<input type="radio" name="type" value="comment">Comments<br>
+						<input type="radio" name="type" value="edition">Edition<br>
+						<input type="radio" name="type" value="series">Series<br>
 						<input type="radio" name="type" value="other"> Other
 					</form>
 					</div>
@@ -662,23 +665,23 @@
 
 		<div class="t-center p-l-15 p-r-15">
 			<a href="#">
-				<img class="h-size2" src="images/icons/paypal.png" alt="IMG-PAYPAL">
+				<img class="h-size2" src="{% static 'fashe-colorlib/images/icons/paypal.png' %}" alt="IMG-PAYPAL">
 			</a>
 
 			<a href="#">
-				<img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
+				<img class="h-size2" src="{% static 'fashe-colorlib/images/icons/visa.png' %}" alt="IMG-VISA">
 			</a>
 
 			<a href="#">
-				<img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
+				<img class="h-size2" src="{% static 'fashe-colorlib/images/icons/mastercard.png' %}" alt="IMG-MASTERCARD">
 			</a>
 
 			<a href="#">
-				<img class="h-size2" src="images/icons/express.png" alt="IMG-EXPRESS">
+				<img class="h-size2" src="{% static 'fashe-colorlib/images/icons/express.png' %}" alt="IMG-EXPRESS">
 			</a>
 
 			<a href="#">
-				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
+				<img class="h-size2" src="{% static 'fashe-colorlib/images/icons/discover.png' %}" alt="IMG-DISCOVER">
 			</a>
 
 			<div class="t-center s-text8 p-t-20">
