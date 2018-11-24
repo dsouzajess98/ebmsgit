@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'reglog',
+    'payment',
     'market',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,13 +53,6 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'proj.urls'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'catherinadiana@gmail.com'
-EMAIL_HOST_PASSWORD = 'hello1234567'
-EMAIL_PORT = 587
 
 TEMPLATES = [
     {

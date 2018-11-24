@@ -184,12 +184,6 @@ def checkout(request):
 	response['c']=c
 	return render(request, 'market/checkout.html', response)
 
-def sendemail(request):
-	subject = 'Thank you for registering to our site'
-	message = ' it  means a world to us '
-	email_from = settings.EMAIL_HOST_USER
-	recipient_list = [request.user.email,]
-	send_mail( subject, message, email_from, recipient_list )
 
 def preview(request):
 	#template=get_template('printpreview.html')
