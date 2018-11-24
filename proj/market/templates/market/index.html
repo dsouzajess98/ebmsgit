@@ -179,7 +179,7 @@
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
 			<a href="index.html" class="logo-mobile">
-				<img src="{% static 'fashe-colorlib/images/icons/logo.png' %}" alt="IMG-LOGO">
+				<img src="{% static 'fashe-colorlib/images/icons/ebms.jpeg' %}" alt="IMG-LOGO">
 			</a>
 
 			<!-- Button show menu -->
@@ -194,68 +194,41 @@
 
 					<div class="header-wrapicon2">
 						<img src="{% static 'fashe-colorlib/images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+						<span class="header-icons-noti">{{count}}</span>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
+								{% for e in ebook %}
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-										<img src="{% static 'fashe-colorlib/images/item-cart-01.jpg' %}" alt="IMG">
+										<img src={{e.image.url}} alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
 										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
+											{{e.title}}
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $19.00
+											1 x ${{e.cost}}
 										</span>
 									</div>
 								</li>
+								{% endfor %}
 
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="{% static 'fashe-colorlib/images/item-cart-02.jpg' %}" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="{% static 'fashe-colorlib/images/item-cart-03.jpg' %}" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
+									
+								
 							</ul>
 
 							<div class="header-cart-total">
-								Total: $75.00
+							Total: ${{c}}
 							</div>
 
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="/market/cart/" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -285,19 +258,19 @@
 				<ul class="main-menu">
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<span class="topbar-child1">
-							Free shipping for standard order over $100
+							Get the best ebook here
 						</span>
 					</li>
 
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<div class="topbar-child2-mobile">
 							<span class="topbar-email">
-								fashe@example.com
+								seproj@example.com
 							</span>
 
 							<div class="topbar-language rs1-select2">
 								<select class="selection-1" name="time">
-									<option>USD</option>
+									<option>INR</option>
 									<option>EUR</option>
 								</select>
 							</div>
@@ -313,40 +286,27 @@
 							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
 						</div>
 					</li>
+						<li class="item-menu-mobile">
+								<a href="index.html">Home</a>
+								
+							</li>
 
-					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
-						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
-							<li><a href="home-02.html">Homepage V2</a></li>
-							<li><a href="home-03.html">Homepage V3</a></li>
-						</ul>
-						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
-					</li>
+							<li class="item-menu-mobile">
+								<a href="/market/booklist/">Shop</a>
+							</li>
 
-					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
-					</li>
 
-					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
-					</li>
+							<li class="item-menu-mobile">
+								<a href="/market/about/">About</a>
+							</li>
 
-					<li class="item-menu-mobile">
-						<a href="/market/cart">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="/market/about">About</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
-					</li>
+							<li class="item-menu-mobile">
+								<a href="contact.html">Contact</a>
+							</li>
+							<li class="item-menu-mobile">
+								<a href="/market/news/">Download news</a>
+							</li>
+					
 				</ul>
 			</nav>
 		</div>
@@ -529,10 +489,11 @@
 					<div class="item-slick2 p-l-15 p-r-15">
 						<!-- Block2 -->
 						<div class="block2">
+						
 							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
 								<img src={{post.image.url}} alt="IMG-PRODUCT">
-
 								<div class="block2-overlay trans-0-4">
+								
 									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
 										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
@@ -545,10 +506,11 @@
 										</button></a>
 									</div>
 								</div>
+								
 							</div>
 
 							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								<a href="/market/ebook/{{post.title}}/" class="block2-name dis-block s-text3 p-b-5">
 									{{post.title}}
 								</a>
 
@@ -575,7 +537,7 @@
 			<div class="row">
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="hov-img-zoom pos-relative">
-						<img src="{% static 'fashe-colorlib/images/banner-08.jpg' %}" alt="IMG-BANNER">
+						<img src="{% static 'fashe-colorlib/images/game.jpg' %}" alt="IMG-BANNER">
 
 						<div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
 							<span class="m-text9 p-t-45 fs-20-sm">
@@ -595,60 +557,62 @@
 
 				<div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
 					<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
-						<img src="{% static 'fashe-colorlib/images/shop-item-09.jpg' %}" alt="IMG-BANNER">
+						<img src="{% static 'fashe-colorlib/images/book.jpg' %}" alt="IMG-BANNER" height="463px" width="100px">
 
-						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
+						<div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 " style="padding-bottom:250px;">
 							<div class="t-center">
-								<a href="product-detail.html" class="dis-block s-text3 p-b-5">
-									Mega Sale: As I Descended
+								<a href="/market/booklist/" class="dis-block s-text3 p-b-5" >
+									<span class="m-text9 p-t-30 fs-20-sm" style="color:white;">
+								Mega Sale
+							</span>
 								</a>
 
-								<span class="block2-oldprice m-text7 p-r-5">
+								<span class="block2-oldprice m-text7 p-r-5" style="color:white;">
 									$29.50
 								</span>
 
-								<span class="block2-newprice m-text8">
+								<span class="block2-newprice m-text8" style="color:red;">
 									$15.90
 								</span>
 							</div>
 
 							<div class="flex-c-m p-t-44 p-t-30-xl">
 								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 days">
+									<span class="m-text10 p-b-1 days" style="color:white;">
 										69
 									</span>
 
-									<span class="s-text5">
+									<span class="s-text5" style="color:white;">
 										days
 									</span>
 								</div>
 
 								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 hours">
+									<span class="m-text10 p-b-1 hours" style="color:white;">
 										04
 									</span>
 
-									<span class="s-text5">
+									<span class="s-text5"style="color:white;">
 										hrs
 									</span>
 								</div>
 
 								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 minutes">
+									<span class="m-text10 p-b-1 minutes" style="color:white;">
 										32
 									</span>
 
-									<span class="s-text5">
+									<span class="s-text5" style="color:white;">
 										mins
 									</span>
 								</div>
 
-								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
-									<span class="m-text10 p-b-1 seconds">
+								<div class="flex-col-c-m size3 bo1 m-l-5 m-r-5" style="color:white;">
+									<span class="m-text10 p-b-1 seconds" style="color:white;">
 										05
 									</span>
 
-									<span class="s-text5">
+									<span class="s-text5" style="color:white;">
 										secs
 									</span>
 								</div>

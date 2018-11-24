@@ -13,9 +13,14 @@ urlpatterns = [
         url(r'^booklist/$', views.booklist, name='index'),
         url(r'^addtocart/(?P<post>[A-Za-z0-9., ]+)/$', views.addtocart, name='addtocart'),
         url(r'^logout/$',views.logout_view,name="logout"),
-		url(r'^news/$', views.news, name='news'),
-		url(r'^checkout/$', views.checkout, name='checkout'),
-        
+        url(r'^news/$', views.news, name='news'),
+        url(r'^checkout/$', views.checkout, name='checkout'),
+        url(r'^sendemail/$', views.sendemail, name='sendemail'),
+        #url(r'^pdf-viewer/$', views.pdf_viewer, name='pdf_viewer_page'),
+        url(r'^pdf/$', views.zipmerger, name='pdf_viewer_page'),
+        url(r'^ebook/(?P<item>[A-Za-z0-9., ]+)/$', views.ebook_view, name='ebook-view'),
+        url(r'^addcomment/(?P<item>[A-Za-z0-9., ]+)/$', views.addcomment, name='addcomment'),
+        url(r'^category/(?P<cat>[A-Za-z0-9., ]+)/$', views.category, name='category'),
         #url(),  
         
         

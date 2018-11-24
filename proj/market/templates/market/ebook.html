@@ -346,31 +346,35 @@
 
 						<ul class="p-b-54">
 							<li class="p-t-4">
-								<a href="#" class="s-text13 active1">
+								<a href="/market/booklist/" class="s-text13 {%if flag1 == 1 %} active1 {% endif %}">
 									All
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="#" class="s-text13">
+								<a href="/market/category/New/" class="s-text13 {%if flag1 == 2 %} active1 {% endif %}">
 									New Arrivals
 								</a>
 							</li>
-
 							<li class="p-t-4">
-								<a href="#" class="s-text13">
+								<a href="/market/category/Best Seller/" class="s-text13 {%if flag1 == 3 %} active1 {% endif %}">
+									Best Seller
+								</a>
+							</li>
+							<li class="p-t-4">
+								<a href="/market/category/Classic/" class="s-text13 {%if flag1 == 4 %} active1 {% endif %}">
 									Classic
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="#" class="s-text13">
+								<a href="/market/category/Educational/" class="s-text13 {%if flag1 == 5 %} active1 {% endif %}">
 									Educational
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="#" class="s-text13">
+								<a href="/market/category/Technical/" class="s-text13 {%if flag1 == 6 %} active1 {% endif %}">
 									Technical
 								</a>
 							</li>
@@ -478,7 +482,7 @@
 								</div>
 
 								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+									<a href="/market/ebook/{{post.title}}/" class="block2-name dis-block s-text3 p-b-5">
 										{{post.title}}
 									</a>
 

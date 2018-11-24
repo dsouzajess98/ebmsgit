@@ -54,10 +54,17 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'proj.urls'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'catherinadiana@gmail.com'
+EMAIL_HOST_PASSWORD = 'hello1234567'
+EMAIL_PORT = 587
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

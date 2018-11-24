@@ -8,6 +8,18 @@ from django.contrib.auth.models import User
 def get_path(instance,filename):
 	return '{0}/{1}'.format(instance.title,filename)
 
+class Comment(models.Model):
+    user=models.ForeignKey(User,default=1)
+    text=models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.text
+
+class Tag(models.Model):
+    tag_name=models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.tag_name
 
 class Post(models.Model):
     pub_date = models.DateField(default=timezone.now)
@@ -17,6 +29,9 @@ class Post(models.Model):
     cost=models.FloatField(default=0)
     file=models.FileField(upload_to=get_path,null=True)
     image=models.FileField(upload_to=get_path,null=True)
+    comments=models.ManyToManyField(Comment)
+    tags=models.ManyToManyField(Tag)
+
 
     def publish(self):
  #       self.pub_date = timezone.now()
@@ -32,3 +47,5 @@ class Customer(models.Model):
 
 	def __str__(self):
 		return self.user.username
+
+
