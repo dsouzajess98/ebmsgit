@@ -25,6 +25,8 @@ urlpatterns = [
         url(r'^sendmail/$', views.send_mail, name='sendmail'),
         url(r'^admin_add/$', views.admin_add, name='admin_add'),
         url(r'^admin_delete/(?P<post>[A-Za-z0-9., ]+)/$', views.admin_remove, name='admin_delete'),
+        url(r'^give_priv/(?P<un>[A-Za-z0-9., ]+)/$', views.give_priv, name='give_priv'),
+        url(r'^userdetails/(?P<un>[A-Za-z0-9., ]+)/$', views.userdetails, name='userdetails'),
         url(r'^admin/$', views.admin, name='admin'),
         
 	url(r'^saveData/$', views.saveData, name='saveData'),

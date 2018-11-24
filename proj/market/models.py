@@ -53,10 +53,11 @@ class Post(models.Model):
 
 
 class Customer(models.Model):
-	user=models.ForeignKey(User)
-	book=models.ManyToManyField(Post)
+    user=models.ForeignKey(User)
+    book=models.ManyToManyField(Post)
+    is_priv=models.BooleanField(default=False)
 
-	def __str__(self):
-		return self.user.username
+    def __str__(self):
+	   return self.user.username
 
 

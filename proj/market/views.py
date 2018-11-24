@@ -41,22 +41,47 @@ def cart(request):
 def about(request):
     return render(request, 'market/about.html', {})
 
+@login_required(login_url='/market/signup')	
 def admin_add(request):
-    return render(request, 'market/admin_add.html', {})
+	cust=Customer.objects.get(user=request.user)
+	if cust.is_priv:
+		return render(request, 'market/admin_add.html', {})
+	else:
+		return redirect('/market/signup')
 
+@login_required(login_url='/market/signup')	
 def admin_remove(request,post):
-	Post.objects.filter(title=post).delete()
+	cust=Customer.objects.get(user=request.user)
+	if cust.is_priv:
+		Post.objects.filter(title=post).delete()
+		return redirect('/market/admin')
+	else:
+		return redirect('/market/signup')
+
+@login_required(login_url='/market/signup')	
+def admin(request):
+	cust=Customer.objects.get(user=request.user)
+	flag=0
+	user=[]
+	if request.user.is_superuser:
+		flag=1
+		user=Customer.objects.all()
+	if cust.is_priv:
+		post=Post.objects.all()
+		response={}
+		response['posts']=post
+		response['flag']=flag
+		response['cust']=user
+		return render(request, 'market/admin.html', response)
+	else:
+		return redirect('/market/signup')
+
+def give_priv(request,un):
+	user=User.objects.get(username=un)
+	cust=Customer.objects.get(user=user)
+	cust.is_priv=True
+	cust.save()
 	return redirect('/market/admin')
-
-
-def admin(request):
-	print(request.user.is_staff)
-
-def admin(request):
-	post=Post.objects.all()
-	response={}
-	response['posts']=post
-	return render(request, 'market/admin.html', response)
 
 def saveData(request):
 	if request.method == "POST" :
@@ -414,6 +439,28 @@ def ebook_view(request,item):
 
 	return render(request,'market/product-detail.html',response)
 
+def userdetails(request,un):
+	response={}
+	response['un']=un
+	user=User.objects.get(username=un)
+	p=Customer.objects.get(user=user)
+	response['p']=user
+	response['book']=p.book.all()
+	response['user']=request.user
+	response['pr']=p.is_priv
+	cust=Customer.objects.get(user=request.user)
+	p1=cust.book.all()
+
+	count=0
+	c=0
+	for k in p1:
+		count=count+1
+		c=c+k.cost
+	response['count']=count
+	response['c']=c
+	response['ebook']=p1
+
+	return render(request,'market/user-detail.html',response)
 
 def addcomment(request,item):
 	if request.method == 'POST' :
