@@ -1,0 +1,4 @@
+
+*.sqlite3
+proj/market/admin.pyc
+*.pyc

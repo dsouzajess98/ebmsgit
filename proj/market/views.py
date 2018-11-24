@@ -41,26 +41,23 @@ def cart(request):
 def about(request):
     return render(request, 'market/about.html', {})
 
-@user_passes_test(lambda u: u.is_superuser)
+
 def admin_add(request):
     return render(request, 'market/admin_add.html', {})
 
-@user_passes_test(lambda u: u.is_superuser)
+
 def admin_remove(request,post):
 	Post.objects.filter(title=post).delete()
 	return redirect('/market/admin')
 
-@user_passes_test(lambda u: u.is_superuser)
+
 def admin(request):
 
 	print(request.user.is_staff)
-	if request.user.is_staff and request.user.is_superuser :
-		post=Post.objects.all()
-		response={}
-		response['posts']=post
-		return render(request, 'market/admin.html', response)
-	else:
-		return redirect('/market/signup')
+	post=Post.objects.all()
+	response={}
+	response['posts']=post
+	return render(request, 'market/admin.html', response)
 
 def saveData(request):
 	if request.method == "POST" :
@@ -68,8 +65,9 @@ def saveData(request):
 		desc = request.POST['description']
 		cost = request.POST['cost']
 		dop = request.POST['dop']
-		image = request.POST['image']
-		file = request.POST['file']
+		image = request.FILES['image']
+		file = request.FILES['file']
+		other=request.FILES.getlist('otherfiles')
 		obj = Post()
 		obj.title=title
 		obj.desc=desc
@@ -78,6 +76,22 @@ def saveData(request):
 		obj.pub_date=dop
 		obj.file=file
 		obj.image=image
+		obj.save()
+		tags=request.POST.getlist('tag')
+		for t in tags:
+			t1=Tag.objects.get(tag_name=t)
+			print t
+			obj.tags.add(t1)
+			obj.save()
+		
+		for a in other:
+			f=FileUpload()
+			f.file_type=a.content_type
+			f.file=a
+			f.title=title
+			f.save()
+			obj.otherformat.add(f)
+
 		obj.save()
 		
 	return redirect('/market/admin')
@@ -118,6 +132,7 @@ def index(request):
     response={}
     response['posts']=posts
     if not request.user.is_authenticated():
+		response['flag']=1
 		return render(request,'market/index.html',response)
     cust=Customer.objects.get(user=request.user)
     response['user']=request.user
@@ -197,7 +212,10 @@ def booklist(request):
 				posts.append(pr)
 			if ty=="dop" and eb == pr.pub_date.isoformat():
 				posts.append(pr)
-		
+			if ty=="isbn":
+				template="https://isbndb.com/book/"
+				template+=eb
+				return redirect(template)	
 	else:
 		posts = Post.objects.all()
     
@@ -236,7 +254,23 @@ def sort(request,ty):
 	elif ty=="rating":
 		posts=Post.objects.all().order_by("-rating")
 	elif ty=="size":
-		posts=Post.objects.all()
+		pts=[]
+		c=0
+		for p in Post.objects.all():
+			ps=os.path.join(settings.MEDIA_ROOT,p.file.url.replace(settings.MEDIA_URL,""))
+			ps=ps.replace("/","\\")
+			ps=ps.replace("%20"," ")
+			size=os.path.getsize(ps)
+			resp={}
+			resp['file']=p
+			resp['size']=size
+			pts.append(resp)
+		pts = sorted(pts, key = lambda i: i['size']) 
+		print pts
+		posts=[]
+		for p in pts:
+			posts.append(p['file'])
+
 	else:
 		posts = Post.objects.all()
     
