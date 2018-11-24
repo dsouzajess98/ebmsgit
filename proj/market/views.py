@@ -41,10 +41,8 @@ def cart(request):
 def about(request):
     return render(request, 'market/about.html', {})
 
-
 def admin_add(request):
     return render(request, 'market/admin_add.html', {})
-
 
 def admin_remove(request,post):
 	Post.objects.filter(title=post).delete()
@@ -52,8 +50,9 @@ def admin_remove(request,post):
 
 
 def admin(request):
-
 	print(request.user.is_staff)
+
+def admin(request):
 	post=Post.objects.all()
 	response={}
 	response['posts']=post
