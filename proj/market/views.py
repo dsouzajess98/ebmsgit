@@ -97,6 +97,14 @@ def addtocart(request,post):
 	cust.save()
 	return redirect('/market/index')
 
+@login_required(login_url='/market/signup')
+def delfromcart(request,post):
+    p=Post.objects.get(title=post)
+    cust=Customer.objects.get(user=request.user)
+    cust.book.delete(p);
+    cust.save()
+    return redirect('/market/index')
+
 
 @login_required(login_url='/market/signup')
 def logout_view(request):
@@ -142,8 +150,7 @@ def booklist(request):
 	response['c']=c
 	response['ebook']=p
 	return render(request, 'market/ebook.html', response)
-	
-	
+
 def news(request):
 	if not request.user.is_authenticated():
 		return render(request,'market/news.html',{})
