@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.core.mail import send_mail, EmailMessage
 import mimetypes
+from django.contrib.admin.views.decorators import staff_member_required,user_passes_test
 # Create your views here.
 
 def stuff(request):
@@ -31,14 +32,26 @@ def cart(request):
 def about(request):
     return render(request, 'market/about.html', {})
 
+@user_passes_test(lambda u: u.is_superuser)
 def admin_add(request):
     return render(request, 'market/admin_add.html', {})
 
+@user_passes_test(lambda u: u.is_superuser)
+def admin_remove(request,post):
+	Post.objects.filter(title=post).delete()
+    return redirect('/market/admin')
+
+@user_passes_test(lambda u: u.is_superuser)
 def admin(request):
-	post=Post.objects.all()
-	response={}
-	response['posts']=post
-	return render(request, 'market/admin.html', response)
+	print(******************)
+	print(request.user.is_staff)
+	if request.user.is_staff and request.user.is_superuser :
+		post=Post.objects.all()
+		response={}
+		response['posts']=post
+		return render(request, 'market/admin.html', response)
+	else:
+		return redirect('/market/signup')
 
 def saveData(request):
 	if request.method == "POST" :

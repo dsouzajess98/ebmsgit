@@ -18,10 +18,11 @@ urlpatterns = [
         url(r'^sendmail/(?P<post>[A-Za-z0-9., ]+)/$', views.send_mail, name='sendmail'),
         url(r'^sendmail/$', views.send_mail, name='sendmail'),
         url(r'^admin_add/$', views.admin_add, name='admin_add'),
+        url(r'^admin_delete/(?P<post>[A-Za-z0-9., ]+)/$', views.admin_remove, name='admin_delete'),
         url(r'^admin/$', views.admin, name='admin'),
 		url(r'^saveData/$', views.saveData, name='saveData'),
 		url(r'^sort/(?P<ty>[A-Za-z0-9., ]+)/$', views.sort, name='sort'),
         #url(),  
         
         
-        ]
+        ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

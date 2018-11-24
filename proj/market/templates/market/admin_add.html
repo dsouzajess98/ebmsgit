@@ -187,7 +187,7 @@
 	<div class="container">
 	<div class="leftbar p-r-20 p-r-0-sm">
 	<div class="col-sm-3 col-md-10 col-lg-13 p-b-50">
-	<form method="post" action="/market/saveData/">
+	<form method="post" action="/market/saveData/" enctype="multipart/form-data">
 	{% csrf_token %}
 		<label class="s-text12 p-b-30">Title : </label>
 		<input type="text" name="title" class="s-text7 bg6 p-b-5" required><br>
