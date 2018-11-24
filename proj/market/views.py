@@ -207,14 +207,23 @@ def booklist(request):
 		for pr in prod:
 			if ty=="title" and eb.lower() in pr.title.lower():
 				posts.append(pr)
-			if ty=="author" and eb.lower() in pr.author.username.lower():
+			elif ty=="author" and eb.lower() in pr.author.username.lower():
 				posts.append(pr)
-			if ty=="dop" and eb == pr.pub_date.isoformat():
+			elif ty=="dop" and eb == pr.pub_date.isoformat():
 				posts.append(pr)
-			if ty=="isbn":
+			elif ty=="isbn":
 				template="https://isbndb.com/book/"
 				template+=eb
 				return redirect(template)	
+			elif ty=="comment":
+				for c in pr.comments.all():
+					if eb.lower() in c.text.lower():
+						posts.append(pr)
+						break
+			elif ty=="edition" and eb.lower() in pr.edition.lower():
+				posts.append(pr)
+			elif ty=="series" and eb.lower() in pr.series.lower():
+				posts.append(pr)
 	else:
 		posts = Post.objects.all()
     
