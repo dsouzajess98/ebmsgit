@@ -7,9 +7,9 @@ urlpatterns = [
         url(r'^$', views.stuff, name='stuff'),
         url(r'^signup/$', views.signup, name='signup'),
         url(r'^login/$', views.signin, name='login'),
-	url(r'^cart/$', views.cart, name='cart'),
-	url(r'^about/$', views.about, name='about'),
-	url(r'^index/$', views.index, name='index'),
+		url(r'^cart/$', views.cart, name='cart'),
+		url(r'^about/$', views.about, name='about'),
+		url(r'^index/$', views.index, name='index'),
         url(r'^booklist/$', views.booklist, name='index'),
         url(r'^addtocart/(?P<post>[A-Za-z0-9., ]+)/$', views.addtocart, name='addtocart'),
         url(r'^logout/$',views.logout_view,name="logout"),
@@ -21,7 +21,12 @@ urlpatterns = [
         url(r'^ebook/(?P<item>[A-Za-z0-9., ]+)/$', views.ebook_view, name='ebook-view'),
         url(r'^addcomment/(?P<item>[A-Za-z0-9., ]+)/$', views.addcomment, name='addcomment'),
         url(r'^category/(?P<cat>[A-Za-z0-9., ]+)/$', views.category, name='category'),
-        #url(),  
+        url(r'^sendmail/(?P<post>[A-Za-z0-9., ]+)/$', views.send_mail, name='sendmail'),
+        url(r'^sendmail/$', views.send_mail, name='sendmail'),
+        url(r'^admin_add/$', views.admin_add, name='admin_add'),
+        url(r'^admin_delete/(?P<post>[A-Za-z0-9., ]+)/$', views.admin_remove, name='admin_delete'),
+        url(r'^admin/$', views.admin, name='admin'),
         
-        
-        ]
+	url(r'^saveData/$', views.saveData, name='saveData'),
+	url(r'^sort/(?P<ty>[A-Za-z0-9., ]+)/$', views.sort, name='sort'),
+        ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -40,6 +40,8 @@ class Post(models.Model):
     image=models.FileField(upload_to=get_path,null=True)
     comments=models.ManyToManyField(Comment,blank=True)
     tags=models.ManyToManyField(Tag,blank=True)
+    rating=models.IntegerField(default=0)
+    count=models.IntegerField(default=0)
 
 
     def publish(self):
