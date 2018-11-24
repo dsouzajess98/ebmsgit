@@ -1,4 +1,4 @@
-ZZ{% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -183,34 +183,43 @@ ZZ{% load static %}
 
 
 	<!-- Content page -->
-	<br><br>
-	<div class="wrap-slick2" width="100%">
+	<section class="newproduct bg5 p-t-45 p-b-105">
+		<div class="container">
+			<div class="sec-title p-b-60">
+				<h3 class="m-text5 t-center">
+					Current List of E-books
+				</h3>
+			</div>
+
+			<!-- Slide2 -->
+			<div class="wrap-slick2">
 				<div class="slick2">
 			{% for post in posts %}
 					<div class="item-slick2 p-l-15 p-r-15">
 						<!-- Block2 -->
 						<div class="block2">
+						
 							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
 								<img src={{post.image.url}} alt="IMG-PRODUCT">
-
 								<div class="block2-overlay trans-0-4">
+								
 									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
 										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 									</a>
 
-									<div>
+									<div class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
 										<a href="/market/admin_delete/{{post.title}}/"><button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-											Remove
+											Remove Ebook
 										</button></a>
 									</div>
-									
 								</div>
+								
 							</div>
 
 							<div class="block2-txt p-t-20">
-								<a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+								<a href="/market/ebook/{{post.title}}/" class="block2-name dis-block s-text3 p-b-5">
 									{{post.title}}
 								</a>
 
@@ -227,12 +236,19 @@ ZZ{% load static %}
 
 				</div>
 			</div>
-		<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-			<!-- Button -->
-			<a href="\market\admin_add" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
+
+		</div><br><br><br>
+		<center>Do you want to add any new ebooks?
+		<br><br><a href="\market\admin_add" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
 				Add book
 			</a>
-		</div>
+		</center>
+	</section>
+	
+		
+			<!-- Button -->
+			
+		
 	<!-- Footer -->
 	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
 		<div class="flex-w p-b-90">
