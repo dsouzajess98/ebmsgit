@@ -41,26 +41,26 @@ def cart(request):
 def about(request):
     return render(request, 'market/about.html', {})
 
-@user_passes_test(lambda u: u.is_superuser)
+#@user_passes_test(lambda u: u.is_superuser)
 def admin_add(request):
     return render(request, 'market/admin_add.html', {})
 
-@user_passes_test(lambda u: u.is_superuser)
+#@user_passes_test(lambda u: u.is_superuser)
 def admin_remove(request,post):
 	Post.objects.filter(title=post).delete()
 	return redirect('/market/admin')
 
-@user_passes_test(lambda u: u.is_superuser)
+#@user_passes_test(lambda u: u.is_superuser)
 def admin(request):
 
 	print(request.user.is_staff)
-	if request.user.is_staff and request.user.is_superuser :
-		post=Post.objects.all()
-		response={}
-		response['posts']=post
-		return render(request, 'market/admin.html', response)
-	else:
-		return redirect('/market/signup')
+	#if request.user.is_staff and request.user.is_superuser :
+	post=Post.objects.all()
+	response={}
+	response['posts']=post
+	return render(request, 'market/admin.html', response)
+	#else:
+	#	return redirect('/market/signup')
 
 def saveData(request):
 	if request.method == "POST" :
@@ -197,6 +197,10 @@ def booklist(request):
 				posts.append(pr)
 			if ty=="dop" and eb == pr.pub_date.isoformat():
 				posts.append(pr)
+			if ty=="isbn":
+				template='https://isbndb.com/book/'
+				template+=eb
+				return redirect(template)
 		
 	else:
 		posts = Post.objects.all()
