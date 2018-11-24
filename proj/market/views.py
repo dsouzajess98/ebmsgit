@@ -48,11 +48,11 @@ def admin_add(request):
 @user_passes_test(lambda u: u.is_superuser)
 def admin_remove(request,post):
 	Post.objects.filter(title=post).delete()
-    return redirect('/market/admin')
+	return redirect('/market/admin')
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin(request):
-	print(******************)
+
 	print(request.user.is_staff)
 	if request.user.is_staff and request.user.is_superuser :
 		post=Post.objects.all()
