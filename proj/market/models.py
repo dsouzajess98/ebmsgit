@@ -17,6 +17,8 @@ class Post(models.Model):
     cost=models.FloatField(default=0)
     file=models.FileField(upload_to=get_path,null=True)
     image=models.FileField(upload_to=get_path,null=True)
+    rating=models.IntegerField(default=0)
+    count=models.IntegerField(default=0)
 
     def publish(self):
  #       self.pub_date = timezone.now()

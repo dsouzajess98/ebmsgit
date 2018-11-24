@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Checkout</title>
+	<title>Admin add</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1' %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="{% static 'fashe-colorlib/images/icons/favicon.png' %}">
+	<link rel="icon" type="image/png" href="{% static 'fashe-colorlib/images/icons/favicon.png' %}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'fashe-colorlib/vendor/bootstrap/css/bootstrap.min.css' %}">
 <!--===============================================================================================-->
@@ -27,6 +27,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'fashe-colorlib/vendor/select2/select2.min.css' %}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'fashe-colorlib/vendor/slick/slick.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fashe-colorlib/vendor/noui/nouislider.min.css' %}">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'fashe-colorlib/css/util.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'fashe-colorlib/css/main.css' %}">
@@ -58,8 +60,8 @@
 
 					<div class="topbar-language rs1-select2">
 						<select class="selection-1" name="time">
-							<option>USD</option>
 							<option>INR</option>
+							<option>USD</option>
 						</select>
 					</div>
 				</div>
@@ -68,8 +70,7 @@
 			<div class="wrap_header">
 				<!-- Logo -->
 				<a href="/market/index/" class="logo">
-					<img src="{% static 'fashe-colorlib/images/icons/ebms.jpeg' %}" alt="IMG-LOGO"
-					width="150" style="max-height: 50px">
+					<img src="{% static 'fashe-colorlib/images/icons/ebms.jpeg' %}" alt="IMG-LOGO" width="150" style="max-height: 50px">
 				</a>
 
 				<!-- Menu -->
@@ -77,17 +78,14 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="/market/index/">Home</a>
+								<a href="index.html">Home</a>
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="/market/booklist/">Shop</a>
 							</li>
 
-							<li>
-								<a href="/market/about/">About</a>
-							</li>
-
+							
 							<li>
 								<a href="contact.html">Contact</a>
 							</li>
@@ -95,7 +93,7 @@
 								<a href="/market/news/">Download news</a>
 							</li>
 							<li>
-								<a href="/market/signin/">Sign in</a>
+								<a href="/market/signup/">Sign in</a>
 							</li>
 						</ul>
 					</nav>
@@ -104,22 +102,23 @@
 				<!-- Header Icon -->
 				<div class="header-icons">
 					<a href="#" class="header-wrapicon1 dis-block">
-						<img src="{% static 'fashe-colorlib/images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+						<!--<img src="{% static 'fashe-colorlib/images/icons/icon-header-01.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">-->
+						Welcome {{user}}
 					</a>
-
+					
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2">
 						<img src="{% static 'fashe-colorlib/images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">{{count}}</span>
 
+						
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
 								{% for e in ebook %}
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-										<img src= {{e.image.url}} alt="IMG">
+										<img src={{e.image.url}} alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
@@ -128,7 +127,7 @@
 										</a>
 
 										<span class="header-cart-item-info">
-											${{e.cost}}
+											1 x ${{e.cost}}
 										</span>
 									</div>
 								</li>
@@ -157,88 +156,67 @@
 							</div>
 						</div>
 					</div>
+					<a href="/market/logout/" class="header-wrapicon1 dis-block">
+						<!--<img src="{% static 'fashe-colorlib/images/icons/icon-header-01.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">-->
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
+					</a>
 				</div>
 			</div>
 		</div>
 
+		<!-- Header Mobile -->
 		
+
+		<!-- Menu Mobile -->
+		
+	</header>
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(/static/fashe-colorlib/images/master-slide-03.jpg);">
-	</section>
-
-	<!-- Cart -->
-	<section class="cart bgwhite p-t-70 p-b-100">
-		
-		<div class="container-table-cart pos-relative">
-				<div class="wrap-table-shopping-cart bgwhite">
-					<table class="table-shopping-cart">
-						<tr class="table-head">
-							<th class="column-1"></th>
-							<th class="column-2">Product</th>
-							<th class="column-3">PDF</th>
-						</tr>
-						{% for e in ebook %}
-						<tr class="table-row">
-							<td class="column-1">
-								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src={{e.image.url}} alt="IMG-PRODUCT">
-								</div>
-							</td>
-							<td class="column-2">{{e.title}}</td>
-							<td class="column-3"><a href="/media/{{e.file}}/" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
-								PDF
-							</a></td>
-						</tr>
-						{% endfor %}
-						
-					</table>
-				</div>
-			</div>
-		<div class="flex-w flex-sb bo10 p-t-15 p-b-20">
-		<div class="w-size20 w-full-sm" style="display: inline-block; text-align: center;width: 75%">
-		<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12" style="display: inline-block; text-align: center;width: 75%">
-							<select class="selection-2" name="country">
-								<option>Select a mode of payment...</option>
-								<option>Debit Card</option>
-								<option>Credit Card</option>
-								<option>Net Banking</option>
-								<option>UPI</option>
-							</select>
-						</div>
-						</div>
-						<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-			<!-- Button -->
-			<a href="#" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
-				Hard Copy
-			</a>
-		</div>
-		<br>
-		
-		<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-			<!-- Button -->
-			<a href="\market\sendmail" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
-				e-mail Books
-			</a>
-		</div>
-						</div>
-		
-		
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/static/fashe-colorlib/images/master-slide-03.jpg);">
+		<h2 class="l-text2 t-center">
+			EBook
+		</h2>
+		<p class="m-text13 t-center">
+			New Collection 2018
+		</p>
 	</section>
 
 
-
+	<!-- Content page -->
+	<br><br>
+	<div class="container">
+	<div class="leftbar p-r-20 p-r-0-sm">
+	<div class="col-sm-3 col-md-10 col-lg-13 p-b-50">
+	<form method="post" action="/market/saveData/">
+	{% csrf_token %}
+		<label class="s-text12 p-b-30">Title : </label>
+		<input type="text" name="title" class="s-text7 bg6 p-b-5" required><br>
+		<label class="s-text12 p-b-30">Date of publishing : </label>
+		<input type="date" name="dop" class="s-text7 bg6 p-b-5" required><br>
+		<label class="s-text12 p-b-30">Description : </label>
+		<input type="text" name="description" class="s-text7 bg6 p-b-5" required><br>
+		<label class="s-text12 p-b-30">Cost : </label>
+		<input type="number" name="cost" class="s-text7 bg6 p-b-5" required><br>
+		<label class="s-text12 p-b-30">Image : </label>
+		<input type="file" name="image" required><br>
+		<label class="s-text12 p-b-30">File : </label>
+		<input type="file" name="file" required><br>
+		<button type="submit" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4">Submit</button>
+	</form>
+	</div>
+	</div>
+	</div>
 	<!-- Footer -->
 	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
 		<div class="flex-w p-b-90">
-			<div class="w-size5 p-t-30 p-l-15 respon3" style="display: inline-block; text-align: left;width: 75%">
+			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
 				<h4 class="s-text12 p-b-30">
 					GET IN TOUCH
 				</h4>
 
 				<div>
 					<p class="s-text7 w-size27">
-						NITW Warangal
+						Any questions? Let us know 
 					</p>
 
 					<div class="flex-m p-t-30">
@@ -251,8 +229,103 @@
 				</div>
 			</div>
 
-			
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3" style="display: inline-block; text-align: left;width: 25%">
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Categories
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							New Arrivals
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Classic
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Educational
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Technical
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Links
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Search
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							About Us
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Contact Us
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Returns
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Help
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Track Order
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Returns
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Shipping
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							FAQs
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
 				<h4 class="s-text12 p-b-30">
 					Newsletter
 				</h4>
@@ -335,6 +408,55 @@
 			minimumResultsForSearch: 20,
 			dropdownParent: $('#dropDownSelect2')
 		});
+	</script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="{% static 'fashe-colorlib/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'fashe-colorlib/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="{% static 'fashe-colorlib/vendor/slick/slick.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'fashe-colorlib/js/slick-custom.js' %}"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="{% static 'fashe-colorlib/vendor/sweetalert/sweetalert.min.js' %}"></script>
+	<script type="text/javascript">
+		$('.block2-btn-addcart').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+
+		$('.block2-btn-addwishlist').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+			});
+		});
+	</script>
+
+<!--===============================================================================================-->
+	<script type="text/javascript" src="{% static 'fashe-colorlib/vendor/noui/nouislider.min.js' %}"></script>
+	<script type="text/javascript">
+		/*[ No ui ]
+	    ===========================================================*/
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 0, 100 ],
+	        connect: true,
+	        range: {
+	            'min': 0,
+	            'max': 100
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]) ;
+	    });
 	</script>
 <!--===============================================================================================-->
 	<script src="{% static 'fashe-colorlib/js/main.js' %}"></script>

@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required,user_passes_test
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
+import mimetypes
 # Create your views here.
 
 def stuff(request):
@@ -30,6 +31,34 @@ def cart(request):
 def about(request):
     return render(request, 'market/about.html', {})
 
+def admin_add(request):
+    return render(request, 'market/admin_add.html', {})
+
+def admin(request):
+	post=Post.objects.all()
+	response={}
+	response['posts']=post
+	return render(request, 'market/admin.html', response)
+
+def saveData(request):
+	if request.method == "POST" :
+		title = request.POST['title']
+		desc = request.POST['description']
+		cost = request.POST['cost']
+		dop = request.POST['dop']
+		image = request.POST['image']
+		file = request.POST['file']
+		obj = Post()
+		obj.title=title
+		obj.desc=desc
+		obj.cost=cost
+		obj.author=request.user
+		obj.pub_date=dop
+		obj.file=file
+		obj.image=image
+		obj.save()
+		
+	return redirect('/market/admin')
 
 def signup(request):
 	response = {}
@@ -87,6 +116,28 @@ def addtocart(request,post):
 	cust=Customer.objects.get(user=request.user)
 	cust.book.add(p)
 	cust.save()
+	c=0
+	p.count=p.count+1
+	p.save()
+	print p.count
+	p=Post.objects.all()
+	print p
+	for po in p:
+		c=c+po.count
+	print c
+	for po in p:
+		c1=po.count/c
+		if c1>=0.8:
+			po.rating=5
+		elif c1>=0.6:
+			po.rating=4
+		elif c1>=0.4:
+			po.rating=3
+		elif c1>=0.2:
+			po.rating=2
+		else:
+			po.rating=1
+		po.save()
 	return redirect('/market/index')
 
 
@@ -116,6 +167,7 @@ def booklist(request):
 				posts.append(pr)
 			if ty=="dop" and eb == pr.pub_date.isoformat():
 				posts.append(pr)
+		
 	else:
 		posts = Post.objects.all()
     
@@ -134,6 +186,43 @@ def booklist(request):
 	response['ebook']=p
 	return render(request, 'market/ebook.html', response)
 	
+
+def sort(request,ty):
+	posts=[]
+	#if request.method == 'POST' :
+	#ty = request.POST.get('sorting')
+	print ty
+	if ty=="author":
+		posts=Post.objects.all().order_by("author")
+	elif ty=="priceasc":
+		posts=Post.objects.all().order_by("cost")
+	elif ty=="pricedesc":
+		posts=Post.objects.all().order_by("-cost")
+	elif ty=="title":
+		posts=Post.objects.all().order_by("title")
+	elif ty=="pubdate":
+		posts=Post.objects.all().order_by("pub_date")
+	elif ty=="rating":
+		posts=Post.objects.all().order_by("-rating")
+	elif ty=="size":
+		posts=Post.objects.all()
+	else:
+		posts = Post.objects.all()
+    
+	response={}
+	response['posts']=posts
+	cust=Customer.objects.get(user=request.user)
+	response['user']=request.user
+	p=cust.book.all()
+	count=0
+	c=0
+	for k in p:
+		count=count+1
+		c=c+k.cost
+	response['count']=count
+	response['c']=c
+	response['ebook']=p
+	return render(request, 'market/ebook.html', response)
 	
 def news(request):
 	if not request.user.is_authenticated():
@@ -167,3 +256,15 @@ def checkout(request):
 	response['count']=count
 	response['c']=c
 	return render(request, 'market/checkout.html', response)
+
+def send_mail(request):
+	cust=Customer.objects.get(user=request.user)
+	p=cust.book.all()
+	mail = EmailMessage("Ebooks", "", "seproj123@gmail.com", [request.user.email])
+	for k in p:
+		#f=open(k.file.name)
+		content_type= mimetypes.guess_type(k.file.name)[0]
+		#print content_type
+		mail.attach(k.file.name,k.file.read(),content_type)
+	mail.send()
+	return redirect('/market/checkout')

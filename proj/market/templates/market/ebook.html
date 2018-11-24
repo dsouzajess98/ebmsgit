@@ -427,14 +427,25 @@
 					<div class="flex-sb-m flex-w p-b-35">
 						<div class="flex-w">
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-								<select class="selection-2" name="sorting">
+								<select class="selection-2" name="sorting" id="foo">
 									<option>Default Sorting</option>
-									<option>Popularity</option>
-									<option>Price: low to high</option>
-									<option>Price: high to low</option>
+									<option name="type2" value="pop" href="\market\sort\pop">Popularity</option>
+									<option name="type2" value="title" href="\market\sort\title">Title</option>
+									<option name="type2" value="author" href="\market\sort\author">Author</option>
+									<option name="type2" value="priceasc" href="\market\sort\priceasc">Price: low to high</option>
+									<option name="type2" value="pricedesc" href="\market\sort\pricedesc">Price: high to low</option>
+									<option name="type2" value="rating" href="\market\sort\rating">Rating</option>
+									<option name="type2" value="pub_date" href="\market\sort\pubdate">Date of publishing</option>
+									<option name="type2" value="size" href="\market\sort\size">Size</option>
 								</select>
 							</div>
-
+							<script>
+							document.getElementById("foo").onchange = function() {
+							if (this.selectedIndex!==0) {
+								window.location.href = this.children[this.selectedIndex].getAttribute('href');
+							}        
+							};
+							</script>
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
 								<select class="selection-2" name="sorting">
 									<option>Price</option>
