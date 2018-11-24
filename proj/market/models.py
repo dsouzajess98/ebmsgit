@@ -21,6 +21,14 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag_name
 
+class FileUpload(models.Model):
+    file_type=models.CharField(max_length=200)
+    title=models.CharField(max_length=200)
+    file=models.FileField(upload_to=get_path,null=True)
+
+    def __str__(self):
+        return self.title
+
 class Post(models.Model):
     pub_date = models.DateField(default=timezone.now)
     title = models.CharField(max_length=200)
@@ -28,9 +36,10 @@ class Post(models.Model):
     desc = models.TextField() #this is the book description
     cost=models.FloatField(default=0)
     file=models.FileField(upload_to=get_path,null=True)
+    otherformat=models.ManyToManyField(FileUpload,blank=True)
     image=models.FileField(upload_to=get_path,null=True)
-    comments=models.ManyToManyField(Comment)
-    tags=models.ManyToManyField(Tag)
+    comments=models.ManyToManyField(Comment,blank=True)
+    tags=models.ManyToManyField(Tag,blank=True)
 
 
     def publish(self):
