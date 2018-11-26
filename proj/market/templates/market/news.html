@@ -97,9 +97,11 @@
 								<a href="/market/signup/">Sign in</a>
 							</li>
 							{% endif %}
+							{% if priv == 1 %}
 							<li>
 								<a href="/market/admin/">Admin page</a>
 							</li>
+							{% endif %}
 						</ul>
 					</nav>
 				</div>

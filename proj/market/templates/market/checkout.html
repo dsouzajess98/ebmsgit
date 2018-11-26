@@ -107,6 +107,10 @@
 				<!-- Header Icon -->
 				<div class="header-icons">
 					<a href="#" class="header-wrapicon1 dis-block">
+						<!--<img src="{% static 'fashe-colorlib/images/icons/icon-header-01.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">-->
+						Welcome {{user}}
+					</a>&nbsp;&nbsp;
+					<a href="#" class="header-wrapicon1 dis-block">
 						<img src="{% static 'fashe-colorlib/images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
 					</a>
 
@@ -119,7 +123,7 @@
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
-								{% for e in ebook %}
+								{% for e in ef %}
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
 										<img src= {{e.image.url}} alt="IMG">
@@ -160,6 +164,12 @@
 							</div>
 						</div>
 					</div>
+					
+					<a href="/market/logout/" class="header-wrapicon1 dis-block">
+						<!--<img src="{% static 'fashe-colorlib/images/icons/icon-header-01.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">-->
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
+					</a>
+					
 				</div>
 			</div>
 		</div>
@@ -172,6 +182,11 @@
 <section class="cart bgwhite p-t-70 p-b-100">
 		<div class="container">
 			<!-- Cart item -->
+			<div class="sec-title p-b-60">
+				<h3 class="m-text5 t-center">
+					Payment Successful
+				</h3>
+			</div>
 			<div class="container-table-cart pos-relative">
 				<div class="wrap-table-shopping-cart bgwhite">
 					<table class="table-shopping-cart">

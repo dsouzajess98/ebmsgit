@@ -25,8 +25,19 @@ def stuff(request):
 
 @login_required(login_url='/market/signup')	
 def payment(request):
+	if request.method == 'POST' :
+		cust=Customer.objects.get(user=request.user)
+		for p in cust.books_bought.all():
+			cust.books_bought.remove(p)
+		for p in cust.book.all():
+			ps=Post.objects.get(title=p.title)
+			cust.books_bought.add(ps)
+			cust.book.remove(ps)
+			cust.save()
 
-    return render(request, 'market/payment.html', {})
+    		return redirect('/market/checkout/')
+
+	return render(request, 'market/payment.html', {})
 
 @login_required(login_url='/market/signup')	
 def cart(request):
@@ -175,6 +186,8 @@ def index(request):
     response['posts']=posts
     if not request.user.is_authenticated():
 		response['flag']=1
+		response['priv']=0
+		response['count']=0
 		return render(request,'market/index.html',response)
     cust=Customer.objects.get(user=request.user)
     response['user']=request.user
@@ -184,6 +197,10 @@ def index(request):
     for k in p:
     	count=count+1
     	c=c+k.cost
+    if cust.is_priv==True:
+    	response['priv']=1
+    else:
+    	response['priv']=0
     response['count']=count
     response['c']=c
     response['ebook']=p
@@ -236,9 +253,8 @@ def logout_view(request):
 
 
 
-@login_required(login_url='/market/signup')
 def booklist(request):
-
+	response={}
 	if request.method == 'POST' :
 		eb = request.POST['ebook']
 		ty = request.POST['type']
@@ -270,21 +286,28 @@ def booklist(request):
 				posts.append(pr)
 	else:
 		posts = Post.objects.all()
-    
-	response={}
 	response['posts']=posts
-	cust=Customer.objects.get(user=request.user)
-	response['user']=request.user
-	response['flag1']=1
-	p=cust.book.all()
-	count=0
-	c=0
-	for k in p:
-		count=count+1
-		c=c+k.cost
-	response['count']=count
-	response['c']=c
-	response['ebook']=p
+	if not request.user.is_authenticated():
+		response['flag']=1
+		response['priv']=0
+		response['count']=0
+	else:
+		cust=Customer.objects.get(user=request.user)
+		response['user']=request.user
+		response['flag1']=1
+		p=cust.book.all()
+		count=0
+		c=0
+		for k in p:
+			count=count+1
+			c=c+k.cost
+		response['count']=count
+		response['c']=c
+		response['ebook']=p
+		if cust.is_priv==True:
+			response['priv']=1
+		else:
+			response['priv']=0
 	return render(request, 'market/ebook.html', response)
 	
 
@@ -328,6 +351,11 @@ def sort(request,ty):
     
 	response={}
 	response['posts']=posts
+	if not request.user.is_authenticated():
+		response['flag']=1
+		response['priv']=0
+		response['count']=0
+		return render(request, 'market/ebook.html', response)
 	cust=Customer.objects.get(user=request.user)
 	response['user']=request.user
 	p=cust.book.all()
@@ -342,11 +370,15 @@ def sort(request,ty):
 	return render(request, 'market/ebook.html', response)
 	
 def news(request):
+	response={}
 	if not request.user.is_authenticated():
-		return render(request,'market/news.html',{})
+		response['flag']=1
+		response['priv']=0
+		response['count']=0
+		return render(request,'market/news.html',response)
 	cust=Customer.objects.get(user=request.user)
 	p=cust.book.all()
-	response={}
+	
 	response['ebook']=p
 	count=0
 	c=0
@@ -357,21 +389,16 @@ def news(request):
 	response['c']=c
 	return render(request, 'market/news.html', response)
 	
-
+@login_required(login_url='/market/signup')
 def checkout(request):
-	if not request.user.is_authenticated():
-		return render(request,'market/news.html',{})
 	cust=Customer.objects.get(user=request.user)
-	p=cust.book.all()
+	p=cust.books_bought.all()
 	response={}
 	response['ebook']=p
 	count=0
 	c=0
-	for k in p:
-		count=count+1
-		c=c+k.cost
-	response['count']=count
-	response['c']=c
+	response['count']=0
+	response['c']=0
 	return render(request, 'market/checkout.html', response)
 
 def preview(request):
@@ -380,7 +407,7 @@ def preview(request):
 	template=get_template('printpreview.html')
 	#print template
 	cust=Customer.objects.get(user=request.user)
-	p=cust.book.all()
+	p=cust.books_bought.all()
 	context={}
 	context['name']=request.user.username
 	context['ebook']=p
@@ -398,7 +425,7 @@ def preview(request):
 def merger(request):
 	pdf_writer = PdfFileWriter()
 	cust=Customer.objects.get(user=request.user)
-	p=cust.book.all()	
+	p=cust.books_bought.all()	
 	for path in p:
 		ps=os.path.join(settings.MEDIA_ROOT,path.file.url.replace(settings.MEDIA_URL,""))
 		ps=ps.replace("/","\\")
@@ -517,8 +544,6 @@ def category(request,cat):
     
 	response={}
 	response['posts']=posts
-	cust=Customer.objects.get(user=request.user)
-	response['user']=request.user
 	if cat == 'New':
 		response['flag1']=2
 	elif cat =='Best Seller':
@@ -529,6 +554,13 @@ def category(request,cat):
 		response['flag1']=5
 	else:
 		response['flag1']=6
+	if not request.user.is_authenticated():
+		response['flag']=1
+		response['priv']=0
+		response['count']=0
+		return render(request, 'market/ebook.html', response) 
+	cust=Customer.objects.get(user=request.user)
+	response['user']=request.user
 	p=cust.book.all()
 	count=0
 	c=0
@@ -538,6 +570,10 @@ def category(request,cat):
 	response['count']=count
 	response['c']=c
 	response['ebook']=p
+	if cust.is_priv==True:
+		response['priv']=1
+	else:
+		response['priv']=0
 	return render(request, 'market/ebook.html', response) 
 
 

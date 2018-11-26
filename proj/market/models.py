@@ -56,7 +56,8 @@ class Post(models.Model):
 
 class Customer(models.Model):
     user=models.ForeignKey(User)
-    book=models.ManyToManyField(Post)
+    book=models.ManyToManyField(Post,related_name="cart")
+    books_bought=models.ManyToManyField(Post,related_name="bought")
     is_priv=models.BooleanField(default=False)
 
     def __str__(self):
