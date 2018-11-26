@@ -31,5 +31,6 @@ urlpatterns = [
         url(r'^removeuser/(?P<post>[A-Za-z0-9., ]+)/$', views.removeuser, name='removeuser'),
         
 	url(r'^saveData/$', views.saveData, name='saveData'),
+        url(r'^payment/$', views.payment, name='payment'),
 	url(r'^sort/(?P<ty>[A-Za-z0-9., ]+)/$', views.sort, name='sort'),
         ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

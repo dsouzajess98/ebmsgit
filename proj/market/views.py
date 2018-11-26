@@ -24,6 +24,11 @@ def stuff(request):
     return render(request, 'market/stuff.html', {})
 
 @login_required(login_url='/market/signup')	
+def payment(request):
+
+    return render(request, 'market/payment.html', {})
+
+@login_required(login_url='/market/signup')	
 def cart(request):
 	cust=Customer.objects.get(user=request.user)
 	p=cust.book.all()
