@@ -199,7 +199,7 @@
 									<div class="header-cart-item-img">
 										<img src={{e.image.url}} alt="IMG">
 									</div>
-
+									
 									<div class="header-cart-item-txt">
 										<a href="#" class="header-cart-item-name">
 											{{e.title}}
@@ -208,7 +208,7 @@
 										<span class="header-cart-item-info">
 											1 x ${{e.cost}}
 										</span>
-									</div>
+									</div></center>
 								</li>
 								{% endfor %}
 
@@ -310,27 +310,16 @@
 	<!-- Product Detail -->
 
 	<!-- Relate Product -->
-	<section class="userdetails bgwhite p-t-45 p-b-138">
-		
+	<section class="newproduct bg3 p-t-45 p-b-105">
 		<div class="container">
-
 			<div class="sec-title p-b-60">
-
 				<h3 class="m-text5 t-center">
-					User details
+					User Details
 				</h3>
 			</div>
-
-			<!-- Slide2 -->
-			<div class="wrap-slick2">
-				<div class="slick2">
-					<div class="item-slick2 p-l-15 p-r-15">
-						<!-- Block2 -->
-						<div class="block2">
-
-								<div class="block2-txt p-t-20">
+<div class="block2-txt p-t-20">
 								<center href="#" class="block2-name dis-block s-text2 p-b-5">
-									<b>{{p.username}}</b>
+									Username: <b>{{p.username}}</b>
 								</center>
 							</div>
 							{% if pr == 1 %}
@@ -342,7 +331,7 @@
 							</div>
 								{% endif %}
 								<br><br>
-								
+			<!-- Slide2 -->
 				<div class="wrap-slick2">
 				<div class="slick2">
 			{% for post in book %}
@@ -350,48 +339,43 @@
 						<!-- Block2 -->
 						<div class="block2">
 						
-							<div class="block2-img wrap-pic-w of-hidden pos-relative">
+							<div class="block2-img wrap-pic-w of-hidden pos-relative ">
 								<img src={{post.image.url}} alt="IMG-PRODUCT">
+								
 								
 							</div>
 
 							<div class="block2-txt p-t-20">
-								<a href="/market/ebook/{{post.title}}/" class="block2-name dis-block s-text3 p-b-2">
+								<a href="/market/ebook/{{post.title}}/" class="block2-name dis-block s-text3 p-b-5">
 									{{post.title}}
 								</a>
 
+								<span class="block2-price m-text6 p-r-5">
+									{{post.cost}}
+								</span>
 							</div>
 						</div>
 					</div>
 					{% endfor %}
 					
-					
+
 				
 
 				</div>
-
-			</div>
-
+			</div><center>
+<div class="w-size2 p-t-20">
+						<!-- Button -->
+						<a href="/market/removeuser/{{p.username}}/" ><button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
 							
+								Remove User
+							
+						</button></a>
+					</div></center>
+		</div>
 
-							</div>
-
-						</div>
-
-					</div>
-						
-					</div>
-					<center class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-							<!-- Button -->
-							<a href="/market/removeuser/{{p.username}}/" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								<b>Remove User</b>
-							</a>
-						</center>	
-				</div>
-			</div>
-
+					
 	</section>
-
+	
 
 	<!-- Footer -->
 	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">

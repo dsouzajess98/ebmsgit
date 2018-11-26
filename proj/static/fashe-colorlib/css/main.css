@@ -1713,6 +1713,16 @@ li.sale-noti > a {
   transform: translateX(-50%);
   bottom: -45px;
 }
+.block2-btn-priviledge {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: -45px;
+}
 
 /* ------------------------------------ */
 .block2-btn-towishlist,
@@ -1764,6 +1774,9 @@ li.sale-noti > a {
 }
 
 .block2-overlay:hover .block2-btn-addcart {
+  bottom: 20px;
+}
+.block2-overlay:hover .block2-btn-priviledge {
   bottom: 20px;
 }
 

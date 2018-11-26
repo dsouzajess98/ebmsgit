@@ -384,6 +384,10 @@ def preview(request):
 	context={}
 	context['name']=request.user.username
 	context['ebook']=p
+	cst=0
+	for x in p:
+		cst=cst+x.cost
+	context['total']=cst
 	html=template.render(context)
 	pdf=render_to_pdf('printpreview.html',context)
 	return HttpResponse(pdf,content_type='application/pdf')

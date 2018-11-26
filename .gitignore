@@ -2,3 +2,4 @@
 *.sqlite3
 proj/market/admin.pyc
 *.pyc
+proj/market/migrations/0015_customer_is_priv.py
