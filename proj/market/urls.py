@@ -35,4 +35,5 @@ urlpatterns = [
         url(r'^payment/$', views.payment, name='payment'),
 	url(r'^sort/(?P<ty>[A-Za-z0-9., ]+)/$', views.sort, name='sort'),
         url(r'^printreceipt/$', views.preview, name='preview'),
+         url(r'^zip/$', views.zipmerger, name='merger'),
         ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
