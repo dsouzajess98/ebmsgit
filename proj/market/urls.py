@@ -29,6 +29,7 @@ urlpatterns = [
         url(r'^userdetails/(?P<un>[A-Za-z0-9., ]+)/$', views.userdetails, name='userdetails'),
         url(r'^admin/$', views.admin, name='admin'),
         url(r'^removeuser/(?P<post>[A-Za-z0-9., ]+)/$', views.removeuser, name='removeuser'),
+        url(r'^removefromcart/(?P<post>[A-Za-z0-9., ]+)/$', views.delfromcart, name='removefromcart'),
         
 	url(r'^saveData/$', views.saveData, name='saveData'),
         url(r'^payment/$', views.payment, name='payment'),

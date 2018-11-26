@@ -181,6 +181,7 @@
 							<th class="column-1"></th>
 							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
+							<th class="column-4"></th>
 						</tr>
 						{% for e in ebook %}
 						<tr class="table-row">
@@ -191,6 +192,9 @@
 							</td>
 							<td class="column-2">{{e.title}}</td>
 							<td class="column-3" id="fname2">${{e.cost}}</td>
+							<td class="column-4" id="fname2"><a href="/market/removefromcart/{{e.title}}/" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
+								Remove
+							</a></td>
 						</tr>
 						{% endfor %}
 						

@@ -219,13 +219,14 @@ def addtocart(request,post):
 		po.save()
 	return redirect('/market/index')
 
+
 @login_required(login_url='/market/signup')
 def delfromcart(request,post):
     p=Post.objects.get(title=post)
     cust=Customer.objects.get(user=request.user)
-    cust.book.delete(p);
+    cust.book.filter(title=post).delete();
     cust.save()
-    return redirect('/market/index')
+    return redirect('/market/cart')
 
 
 @login_required(login_url='/market/signup')
