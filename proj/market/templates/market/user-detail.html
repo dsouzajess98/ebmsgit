@@ -312,8 +312,11 @@
 
 	<!-- Relate Product -->
 	<section class="userdetails bgwhite p-t-45 p-b-138">
+		
 		<div class="container">
+
 			<div class="sec-title p-b-60">
+
 				<h3 class="m-text5 t-center">
 					User details
 				</h3>
@@ -326,22 +329,21 @@
 						<!-- Block2 -->
 						<div class="block2">
 
-							<div class="block2-txt p-t-20">
 								<div class="block2-txt p-t-20">
-								<center href="/market/ebook/{{post.title}}/" class="block2-name dis-block s-text2 p-b-5">
+								<center href="#" class="block2-name dis-block s-text2 p-b-5">
 									<b>{{p.username}}</b>
 								</center>
-
 							</div>
 							{% if pr == 1 %}
 							<div class="block2-txt p-t-20">
-								<center href="/market/ebook/{{post.title}}/" class="block2-name dis-block s-text2 p-b-5">
+								<center href="#" class="block2-name dis-block s-text2 p-b-5">
 									Privileged user
 								</center>
 
 							</div>
 								{% endif %}
 								<br><br>
+								
 				<div class="wrap-slick2">
 				<div class="slick2">
 			{% for post in book %}
@@ -364,16 +366,28 @@
 					</div>
 					{% endfor %}
 					
-
+					
 				
 
 				</div>
+
 			</div>
-							</div>
-						</div>
-					</div>
+
 							
+
+							</div>
+
+						</div>
+
 					</div>
+						
+					</div>
+					<center class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+							<!-- Button -->
+							<a href="/market/removeuser/{{p.username}}/" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+								<b>Remove User</b>
+							</a>
+						</center>	
 				</div>
 			</div>
 

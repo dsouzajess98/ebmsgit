@@ -59,7 +59,19 @@ def admin_remove(request,post):
 		return redirect('/market/signup')
 
 @login_required(login_url='/market/signup')	
+def removeuser(request,post):
+	if request.user.is_superuser:
+		user=User.objects.get(username=post)
+		Customer.objects.filter(user=user).delete()
+		User.objects.filter(username=post).delete()
+		return redirect('/market/admin')
+	else:
+		return redirect('/market/signup')
+
+@login_required(login_url='/market/signup')	
 def admin(request):
+	if not request.user.is_authenticated():
+		return redirect('/market/signup')
 	cust=Customer.objects.get(user=request.user)
 	flag=0
 	user=[]
