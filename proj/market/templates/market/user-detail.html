@@ -76,12 +76,7 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="index.html">Home</a>
-								<!--<ul class="sub_menu">
-									<li><a href="index.html">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
-								</ul>-->
+								<a href="/market/index/">Home</a>
 							</li>
 
 							<li>
@@ -94,12 +89,16 @@
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
-							</li>
-							<li>
 								<a href="/market/news/">Download news</a>
 							</li>
-							
+							{% if flag == 1 %}
+							<li >
+								<a href="/market/signup/">Sign in</a>
+							</li>
+							{% endif %}
+							<li>
+								<a href="/market/admin/">Admin page</a>
+							</li>
 						</ul>
 					</nav>
 				</div>
@@ -155,7 +154,7 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="/market/checkout/" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										Check Out
 									</a>
 								</div>

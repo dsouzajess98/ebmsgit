@@ -81,21 +81,24 @@
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="/market/booklist/">Shop</a>
 							</li>
+
 
 							<li>
 								<a href="/market/about/">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
-							</li>
-							<li>
 								<a href="/market/news/">Download news</a>
 							</li>
+							{% if flag == 1 %}
+							<li >
+								<a href="/market/signup/">Sign in</a>
+							</li>
+							{% endif %}
 							<li>
-								<a href="/market/signin/">Sign in</a>
+								<a href="/market/admin/">Admin page</a>
 							</li>
 						</ul>
 					</nav>

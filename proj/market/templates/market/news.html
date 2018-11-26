@@ -77,10 +77,11 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="/market/index">Home</a>
+								<a href="/market/index/">Home</a>
 							</li>
+
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="/market/booklist/">Shop</a>
 							</li>
 
 
@@ -89,13 +90,15 @@
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
-							</li>
-							<li>
 								<a href="/market/news/">Download news</a>
 							</li>
-							<li>
+							{% if flag == 1 %}
+							<li >
 								<a href="/market/signup/">Sign in</a>
+							</li>
+							{% endif %}
+							<li>
+								<a href="/market/admin/">Admin page</a>
 							</li>
 						</ul>
 					</nav>
