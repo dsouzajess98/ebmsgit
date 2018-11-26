@@ -137,10 +137,11 @@ def signup(request):
 	if request.method == 'POST' :
 		username = request.POST['username']
 		password = request.POST['password']
+		email = request.POST['email']
 		if User.objects.filter(username=username):
 			response['error']=1
 		else:
-			User.objects.create_user(username = username,password = password,email='')
+			User.objects.create_user(username = username,password = password,email = email)
 			cust=Customer()
 			cust.user=User.objects.get(username=username)
 			cust.save()
