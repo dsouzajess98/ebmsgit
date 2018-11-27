@@ -96,9 +96,11 @@
 								<a href="/market/signup/">Sign in</a>
 							</li>
 							{% endif %}
+							{% if priv == 1 %}
 							<li>
 								<a href="/market/admin/">Admin page</a>
 							</li>
+							{% endif %}
 						</ul>
 					</nav>
 				</div>
@@ -154,7 +156,7 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="/market/checkout/" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="/market/payment/" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										Check Out
 									</a>
 								</div>
@@ -301,6 +303,16 @@
 							<li class="item-menu-mobile">
 								<a href="/market/news/">Download news</a>
 							</li>
+							{% if flag == 1 %}
+							<li >
+								<a href="/market/signup/">Sign in</a>
+							</li>
+							{% endif %}
+							{% if priv == 1 %}
+							<li>
+								<a href="/market/admin/">Admin page</a>
+							</li>
+							{% endif %}
 					
 				</ul>
 			</nav>
@@ -455,9 +467,9 @@
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
 								<br>
 								<!-- Button -->
-								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-									Add to Cart
-								</button>
+							<a href="/market/cart/">	<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+								Add to Cart
+								</button></a>
 							</div>
 						</div>
 					</div>

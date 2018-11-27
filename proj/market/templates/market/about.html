@@ -67,7 +67,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
+				<a href="/market/index/" class="logo">
 					<img src="{% static 'fashe-colorlib/images/icons/ebms.jpeg' %}" alt="IMG-LOGO"
 					width="150" style="max-height: 50px">
 				</a>
@@ -97,9 +97,11 @@
 								<a href="/market/signup/">Sign in</a>
 							</li>
 							{% endif %}
+							{% if priv == 1 %}
 							<li>
-								<a href="/market/admin/">Admin page</a>
+								<a href="/market/payment/">Admin page</a>
 							</li>
+							{% endif %}
 						</ul>
 					</nav>
 				</div>
@@ -160,6 +162,12 @@
 							</div>
 						</div>
 					</div>
+					{% if flag != 1 %}
+					<a href="/market/logout/" class="header-wrapicon1 dis-block">
+						<!--<img src="{% static 'fashe-colorlib/images/icons/icon-header-01.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">-->
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout
+					</a>
+					{% endif %}
 				</div>
 			</div>
 		</div>

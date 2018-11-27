@@ -55,7 +55,28 @@ def cart(request):
 	return render(request, 'market/cart.html', response)
 
 def about(request):
-    return render(request, 'market/about.html', {})
+	response={}
+	if not request.user.is_authenticated():
+		response['flag']=1
+		response['priv']=0
+		response['count']=0
+		return render(request, 'market/about.html', response)
+	cust=Customer.objects.get(user=request.user)
+	response['user']=request.user
+	p=cust.book.all()
+	count=0
+	c=0
+	for k in p:
+		count=count+1
+		c=c+k.cost
+	if cust.is_priv==True:
+		response['priv']=1
+	else:
+		response['priv']=0
+	response['count']=count
+	response['c']=c
+	response['ebook']=p
+	return render(request, 'market/about.html', response)
 
 @login_required(login_url='/market/signup')	
 def admin_add(request):
@@ -241,7 +262,7 @@ def addtocart(request,post):
 def delfromcart(request,post):
     p=Post.objects.get(title=post)
     cust=Customer.objects.get(user=request.user)
-    cust.book.filter(title=post).delete();
+    cust.book.remove(p);
     cust.save()
     return redirect('/market/cart')
 
@@ -367,6 +388,10 @@ def sort(request,ty):
 	response['count']=count
 	response['c']=c
 	response['ebook']=p
+	if cust.is_priv==True:
+			response['priv']=1
+	else:
+			response['priv']=0
 	return render(request, 'market/ebook.html', response)
 	
 def news(request):
@@ -387,6 +412,10 @@ def news(request):
 		c=c+k.cost
 	response['count']=count
 	response['c']=c
+	if cust.is_priv==True:
+			response['priv']=1
+	else:
+			response['priv']=0
 	return render(request, 'market/news.html', response)
 	
 @login_required(login_url='/market/signup')
@@ -401,6 +430,7 @@ def checkout(request):
 	response['c']=0
 	return render(request, 'market/checkout.html', response)
 
+@login_required(login_url='/market/signup')	
 def preview(request):
 	#template=get_template('printpreview.html')
 	#return HttpResponse("Hello")
@@ -421,7 +451,7 @@ def preview(request):
 
 
 
- 
+@login_required(login_url='/market/signup')	
 def merger(request):
 	pdf_writer = PdfFileWriter()
 	cust=Customer.objects.get(user=request.user)
@@ -448,6 +478,7 @@ def merger(request):
 
 	return HttpResponse("sdad")
 
+@login_required(login_url='/market/signup')	
 def zipmerger(request):
 	cust=Customer.objects.get(user=request.user)
 	p=cust.book.all()
@@ -483,6 +514,12 @@ def ebook_view(request,item):
 	response['rel']=reltag
 	response['cnt']=cnt
 	response['post']=p
+	if not request.user.is_authenticated():
+		response['flag']=1
+		response['priv']=0
+		response['count']=0
+		return render(request,'market/product-detail.html',response)
+
 	response['user']=request.user
 	cust=Customer.objects.get(user=request.user)
 	p1=cust.book.all()
@@ -495,7 +532,10 @@ def ebook_view(request,item):
 	response['count']=count
 	response['c']=c
 	response['ebook']=p1
-
+	if cust.is_priv==True:
+			response['priv']=1
+	else:
+			response['priv']=0
 	return render(request,'market/product-detail.html',response)
 
 def userdetails(request,un):
@@ -521,6 +561,7 @@ def userdetails(request,un):
 
 	return render(request,'market/user-detail.html',response)
 
+@login_required(login_url='/market/signup')	
 def addcomment(request,item):
 	if request.method == 'POST' :
 		comm = request.POST['comment']
@@ -576,7 +617,7 @@ def category(request,cat):
 		response['priv']=0
 	return render(request, 'market/ebook.html', response) 
 
-
+@login_required(login_url='/market/signup')	
 def send_mail(request):
 	cust=Customer.objects.get(user=request.user)
 	p=cust.book.all()
