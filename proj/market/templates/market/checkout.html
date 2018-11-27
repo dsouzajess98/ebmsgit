@@ -193,7 +193,8 @@
 						<tr class="table-head">
 							<th class="column-1"></th>
 							<th class="column-2">Product</th>
-							<th class="column-3">PDF</th>
+							<th class="column-3">Format</th>
+							<th class="column-4">Download</th>
 						</tr>
 						{% for e in ebook %}
 						<tr class="table-row">
@@ -204,13 +205,24 @@
 							</td>
 							<td class="column-2">{{e.title}}</td>
 							<td class="column-3" id="fname2">
-							<select id="format">
-								<option value="asda">Hello</option>
-							</select>
-							<a href="/media/{{e.file}}/" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
+							<select id="format" onchange="update(this.value)">
+								<option value={{e.file.url}}>PDF</option>
+								{% for x in e.otherformat.all %}
+								<option value={{x.file.url}}>{{x.file_type}}</option>
+								{% endfor %}
+								
+							</select></td>
+							<td class="column-4" id="fname2">
+							<a id="hello" href="/media/{{e.file}}/" class="flex-c-m size10 bg1 bo-rad-20 hov1 s-text1 trans-0-4" >
 								PDF
 							</a></td>
 						</tr>
+						<script type="text/javascript">
+							function update(ish)
+							{
+								document.getElementById("hello").href=ish;s
+							}
+						</script>
 						{% endfor %}
 						
 					</table>
